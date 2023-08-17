@@ -24,7 +24,7 @@ export default function MainPage({}: Props) {
 
   return (
     <div className="bg-gray-100 p-10 font-serif flex justify-center items-center">
-      <div className="min-h-screen bg-white p-10 w-1/2 shadow-xl rounded">
+      <div className="min-h-screen bg-white p-10 lg:w-4/5 xl:w-2/3 2xl:w-1/2 md:w-full max-w-3xl shadow-xl rounded">
         <div className="py-4">
           <p className="text-blue-500 font-mono text-sm text-center">
             Case: 1-CV/CR-1 - Death Penalty - Published 8th of month 2023
@@ -32,7 +32,7 @@ export default function MainPage({}: Props) {
           
         </div>
         <div className="flex flex-row justify-center items-center">
-            <h2 className="text-2xl mb-4 text-center w-1/2">UNITED STATES DISTRICT COURT DISTRICT OF SAN ANDREAS</h2>
+            <h2 className="text-2xl mb-4 text-center w-2/3">UNITED STATES DISTRICT COURT DISTRICT OF SAN ANDREAS</h2>
         </div>
 
         <div className="flex">
