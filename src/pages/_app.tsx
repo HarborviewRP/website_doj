@@ -23,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <link rel="icon" href="/public/vercel.svg" />
             <meta property="og:image:width" content="64" />
             <meta property="og:image:height" content="64" />
-            <title>HRP - Perma Death Registry</title>
+            <title>HRP - Department of Justice</title>
             <link rel="icon" type="image/x-icon" href="https://cdn.discordapp.com/attachments/1050274665962151957/1140371233234489394/favicon.ico" />
           </Head>
           <Layout user={null}>{page}</Layout>

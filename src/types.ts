@@ -23,18 +23,6 @@ export interface User {
   access_level: ACCESS_LEVEL;
 }
 
-export interface UserData {
-  id: string;
-  name: string;
-  discriminator: string;
-  avatar: string;
-  banner?: string;
-  developer: boolean;
-  moderator: boolean;
-  botModerator: boolean;
-  honorable: boolean;
-}
-
 export interface PageProps {
   user?: User;
 }
@@ -46,20 +34,6 @@ export enum ACCESS_LEVEL {
   ADMIN = 3,
 }
 
-export enum APP_INTERVIEW_STATUS {
-  PENDING = 0,
-  PASSED = 1,
-  FAILED = 2,
-}
-
-export type Note = {
-  noteId: string;
-  authorId: string;
-  timestamp: number;
-  text: string;
-};
-
-export type ApplicationWithId = WithId<Application>;
 
 export interface DeathReg {
   name: string;
@@ -73,86 +47,133 @@ export interface DeathReg {
 
 export type DeathRegWithId = WithId<DeathReg>;
 
-export interface Application {
-  applicantId: string;
-  status: STATUS;
-  statusReason: string | undefined;
-  updatedById: string;
-  submissionDate: number;
-  lastUpdate: number;
-  sections: {
-    sectionId: string;
-    sectionText: string;
-    questions: {
-      questionId: string;
-      questionText: string;
-      responseType: string;
-      choices:
-        | [
-            {
-              choiceId: string;
-              choiceText: string;
-            }
-          ]
-        | undefined;
-      response: {
-        value: string;
-        choiceId: string | undefined;
-      };
-    }[];
-  }[];
-  notes: Note[] | [];
-  interviewId: string | undefined;
+
+// export interface Document {
+//   caseno: number;
+//   type: number; // 1 = search warrant, 2 = arrest warrant, 3 = death penalty
+//   plaintiff: string;
+//   defendant: string;
+//   date: number;
+//   plaintiff_signature: {
+//     signed: boolean;
+//     title: string;
+//     signed_by: number;
+//     signature: string;
+//   };
+//   signature: {
+//     signed: boolean;
+//     title: string;
+//     signed_by: number;
+//     signature: string;
+//   };
+// }
+
+export enum DocumentType {
+  ARREST_WARRANT = 1,
+  SEARCH_WARRANT,
+  DEATH_PENALTY_INTENT,
+}
+export interface Signature {
+  signed: boolean;
+  title: string;
+  signed_by: number;
+  signature: string;
 }
 
-export type InterviewWithId = WithId<Interview>;
-
-export interface Interview {
-  _id?: ObjectId;
-  applicationId: string;
-  applicantId: string;
-  claimedById: string | undefined | null;
-  creationDate: number;
-  status: STATUS;
-  reason: string | undefined;
-  updatedById: string;
-  lastUpdate: number;
-  notes: Note[] | [];
-  recording_path: string | undefined;
+export interface BaseDocument {
+  caseno: number;
+  type: DocumentType;
+  plaintiff: string;
+  defendant: string;
+  date: number;
+  plaintiff_signature: Signature;
+  defendant_signature: Signature;
 }
+
+export interface ArrestWarrant extends BaseDocument {
+  description: string;  // Brief description of the offense
+  issuing_officer: {
+    signature: string;
+    name: string;
+    title: string;
+    city_and_state: string;
+  };
+}
+
+export interface SearchWarrant extends BaseDocument {
+  purpose: string;  // Purpose of the search
+  evidence: string;  // Evidence supporting the warrant
+}
+
+export interface DeathPenaltyIntent extends BaseDocument {
+  reasons: string[];  // Aggravating factors for seeking the penalty
+  certifier: {
+    defendant_name: string;
+    date: number;
+  };
+  submitter: {
+    signature: string;
+    name: string;
+    position: string;
+  };
+}
+
+export type Document = ArrestWarrant | SearchWarrant | DeathPenaltyIntent;
+
+// export type ApplicationWithId = WithId<Application>;
+
+// export interface Application {
+//   applicantId: string;
+//   status: STATUS;
+//   statusReason: string | undefined;
+//   updatedById: string;
+//   submissionDate: number;
+//   lastUpdate: number;
+//   sections: {
+//     sectionId: string;
+//     sectionText: string;
+//     questions: {
+//       questionId: string;
+//       questionText: string;
+//       responseType: string;
+//       choices:
+//         | [
+//             {
+//               choiceId: string;
+//               choiceText: string;
+//             }
+//           ]
+//         | undefined;
+//       response: {
+//         value: string;
+//         choiceId: string | undefined;
+//       };
+//     }[];
+//   }[];
+//   notes: Note[] | [];
+//   interviewId: string | undefined;
+// }
+
+// export type InterviewWithId = WithId<Interview>;
+
+// export interface Interview {
+//   _id?: ObjectId;
+//   applicationId: string;
+//   applicantId: string;
+//   claimedById: string | undefined | null;
+//   creationDate: number;
+//   status: STATUS;
+//   reason: string | undefined;
+//   updatedById: string;
+//   lastUpdate: number;
+//   notes: Note[] | [];
+//   recording_path: string | undefined;
+// }
 
 export enum FormType {
   INTERVIEW,
   APPLICATION,
 }
-
-export interface ChangeLog {
-  userId: string;
-  form: FormType;
-  formId: string;
-  action: Action;
-  changes: FormActionChange[] | undefined;
-}
-
-export enum Action {
-  CREATED,
-  DELETED,
-  MODIFIED,
-}
-
-export interface FormActionChange {
-  field: string;
-  index?: number;
-  previous: string;
-  change: string;
-}
-
-export enum STATUS {
-  PENDING,
-  ACCEPTED,
-  REJECTED,
-}
-
 export class DISCORD {
   static readonly ID = process.env.DISCORD_ID || "1120887833587109991";
   static readonly STAFF_ROLE_ID =
@@ -160,22 +181,3 @@ export class DISCORD {
   static readonly SUPERADMIN_ROLE = process.env.SUPERADMIN__ROLE || "1050767934018035772";
   static readonly VERIFY_ROLE = process.env.VERIFY_ROLE || "1123131546136748092";
 }
-
-export const convertStatus = (status: number) => {
-  let str: string;
-  switch (status) {
-    case 0:
-      str = "pending";
-      break;
-    case 1:
-      str = "approved";
-      break;
-    case 2:
-      str = "rejected";
-      break;
-    default:
-      str = "unknown";
-      break;
-  }
-  return str;
-};

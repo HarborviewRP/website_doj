@@ -81,7 +81,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   <nav className="fixed top-0 left-0 z-40 w-full h-16 bg-blue-700 text-white flex justify-between items-center p-4 sm:p-8">
     <div className="flex flex-col">
       <Link href="/" passHref>
-        <h1 className="text-white italic font-semibold text-xl sm:text-3xl cursor-pointer">San Andreas Death Registry</h1>
+        <h1 className="text-white italic font-semibold text-xl sm:text-3xl cursor-pointer">San Andreas Department of Justice</h1>
       </Link>
       <p className="hidden sm:block">Harborview Roleplay</p>
     </div>
