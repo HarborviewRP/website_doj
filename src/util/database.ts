@@ -1,6 +1,5 @@
-import { Action, ChangeLog, DeathReg, FormActionChange, FormType, Interview } from "./../types";
+import { DeathReg } from "./../types";
 import { Filter, ObjectId } from "mongodb";
-import { Application, User } from "src/types";
 import {
   closeConnection,
   getDeathRegistryCollection,

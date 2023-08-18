@@ -9,8 +9,6 @@ import NoSidebar from "src/components/no-auth-layout";
 import { DISCORD, DeathReg, User } from "src/types";
 import { developerRoute } from "src/util/redirects";
 import { withSession } from "src/util/session";
-import { Application, STATUS } from "src/types";
-import { isUndefined } from "util";
 import Loader from "src/components/Loader";
 import LoginBox from "src/components/user/login";
 import { isStaff } from "src/util/permission";

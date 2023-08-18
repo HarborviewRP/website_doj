@@ -1,4 +1,3 @@
-import { Interview } from "./../../../types";
 import type { NextApiRequest, NextApiResponse } from "next";
 import multer from "multer";
 import { NextIronRequest, withAuth } from "src/util/session";

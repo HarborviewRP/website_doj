@@ -13,7 +13,6 @@ import {
   DeathReg,
   DeathRegWithId,
   FormType,
-  Interview,
   User,
 } from "src/types";
 import { developerRoute } from "src/util/redirects";

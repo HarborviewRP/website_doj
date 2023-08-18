@@ -1,4 +1,4 @@
-import { Action, ChangeLog, DISCORD, DeathRegWithId, FormType } from "src/types";
+import { DISCORD, DeathRegWithId, FormType } from "src/types";
 import { NextApiResponse } from "next";
 import { NextIronRequest, noAuth, withAuth, withSession } from "../../../util/session";
 import { isAdmin, isStaff } from "src/util/permission";

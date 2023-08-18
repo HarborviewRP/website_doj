@@ -8,7 +8,6 @@ import ApplicationBar from "src/components/application/ApplicationBar";
 import Loader from "src/components/Loader";
 import PageSelector from "src/components/PageSector";
 import {
-  Application,
   DeathReg,
   DeathRegWithId,
   DISCORD,

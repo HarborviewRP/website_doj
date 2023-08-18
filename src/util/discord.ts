@@ -10,19 +10,6 @@ export const TOKEN = process.env.BOT_TOKEN || "";
 export const INFRA_SECRET = process.env.INFRA_SECRET;
 export const INFRA_URL = process.env.INFRA_URL || "";
 
-/**
- const response = await fetch("/api/application/update", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-        application: applicationForm,
-        applicationId: (application as any)._id,
-        statusUpdate: applicationForm.status !== application?.status
-    }),
-    });
- */
 export const sendDm = async (userId: string, content: any) => {
   if (!process.env.SEND_STATUS_DM) return false;
   try {

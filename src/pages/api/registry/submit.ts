@@ -1,7 +1,7 @@
 import { NextApiResponse } from "next";
 import { createDeathRegistry } from "src/util/database";
 import { dbConnect } from "src/util/mongodb";
-import { Action, Application, ChangeLog, DeathReg, FormType } from "src/types";
+import { DeathReg, FormType } from "src/types";
 import { NextIronRequest, withAuth } from "../../../util/session";
 import { isStaff } from "src/util/permission";
 import { ObjectId } from "mongodb";
